@@ -1,0 +1,10 @@
+
+<p >Observable Basics</p>
+<b>Observable Data</b>
+  <div *ngFor="let f of fruits">{{ f | uppercase }}</div>
+<div>
+  <b>Error Status:</b>
+    {{ anyErrors ? 'Error Occured ' : 'No errors - everything is good' }}
+</div>
+<div><b>Completion Status:</b> {{ finished ? 'Observer Completed!' : '' }}</div>
+<button (click)="start()">Start Emitting</button>
