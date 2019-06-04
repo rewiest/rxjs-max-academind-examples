@@ -16,17 +16,17 @@ export class PluckComponent {
     input: new FormControl
   });
 
-  f = this.form.valueChanges
+  f = this.form.valueChanges                // reactive form automatically transmits observable via form.valueChanges
     .pipe(
-      pluck('input'),
-      debounceTime(500),
-      distinctUntilChanged()
+      pluck('input'),                       // plucks out the value for the specified property shown in quotes (i.e. value.input)
+      debounceTime(500),                    // wait until typing has stoppped for .5 sec
+      distinctUntilChanged()                // only transmit a new text value if it is different
     )
-    .subscribe({
-      next: (value) => {
+    .subscribe(
+      (value) => {
         console.log(value);
         this.values.push(value as string);
       }
-    });
+    );
 
 }

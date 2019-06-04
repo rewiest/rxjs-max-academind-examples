@@ -17,19 +17,19 @@ export class SwitchMapComponent {
     input: new FormControl
   });
 
-  obs1 = this.form.get('input').valueChanges;
-  obs2 = interval(1000);
+  obs1 = this.form.get('input').valueChanges;   // reactive form automatically transmits observable via form.valueChanges
+  obs2 = interval(1000);                        // create an observable to transmit count every second
 
   m1 = this.obs1
     .pipe(
-      switchMap(event => {
-        return this.obs2;
+      switchMap(event => {                      // received the event and value from observable f1
+        return this.obs2;                       // but switch to return new observable f2
       })
     )
-    .subscribe({
-      next: (value) => {
-        console.log(value);
-        this.value = value;
-      }
-    });
+    .subscribe(
+      (value) => {
+        console.log(value);                     // although f1 triggered the event, the value is that of f2
+        this.value = value;                     // when f1 is triggered again, the value of f2 will be reset
+      }                                         // and cancels old f1 subscriptions when resetting
+    );
 }

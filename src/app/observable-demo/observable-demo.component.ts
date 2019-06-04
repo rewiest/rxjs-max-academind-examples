@@ -41,8 +41,8 @@ export class ObservableDemoComponent {
 
   this.data
     .subscribe(
-      fruit => this.fruits.push(fruit),
-      error => this.anyErrors = true,
+      (fruit) => this.fruits.push(fruit),
+      (error) => this.anyErrors = true,
       () => this.finished = true
     );
   }

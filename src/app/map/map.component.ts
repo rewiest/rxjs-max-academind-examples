@@ -11,26 +11,21 @@ import { map } from 'rxjs/operators';
 export class MapComponent {
 
   value;
-  observable = interval(1000);
-
-  observer = {
-    next: (value) => {
-      this.value = value;
-    },
-    error: (error) => {
-      console.log(error);
-    },
-    complete: () => {
-      console.log('Complete');
-    }
-  };
-
-  sub = this.observable
+  observable$ = interval(1000)        // create an observable to transmit count every second
     .pipe(
-      map((value) => {
+      map((value) => {                // map the passed observable value and double it
         return value = value * 2;
       })
     )
-    .subscribe(this.observer);
-
+    .subscribe(
+      (value) => {                    // 'next' function that output the passed observable value
+        this.value = value;
+      },
+      (error) => {                    // 'error' function that console logs the passed observable error
+        console.log(error);
+      },
+      () => {                         // 'complete' function that outputs the statis 'Complete'
+        console.log('Complete');
+      }
+    );
 }

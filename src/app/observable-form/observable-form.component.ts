@@ -19,7 +19,7 @@ export class ObservableFormComponent {
   f = this.form.get('inputnumber').valueChanges
     .pipe(
       map(n => n * n)
-      )
+    )
     .subscribe(squaredata => this.squaredata = squaredata);
 
 }

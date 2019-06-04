@@ -17,16 +17,16 @@ export class MergeMapComponent {
     input2: new FormControl
   });
 
-  f1 = this.form.get('input1').valueChanges;
-  f2 = this.form.get('input2').valueChanges;
+  f1 = this.form.get('input1').valueChanges;      // reactive form automatically transmits observable via form.valueChanges
+  f2 = this.form.get('input2').valueChanges;      // reactive form automatically transmits observable via form.valueChanges
 
   m1 = this.f1
     .pipe(
-      mergeMap(event1 => {
-        return this.f2
+      mergeMap(event1 => {                        // received the value from f1 observable
+        return this.f2                            // return f2 observable
           .pipe(
-            map(event2 => event1 + ' ' + event2)
-          );
+            map(event2 => event1 + ' ' + event2)  // but only after mapping value of f2 observable with that of f1
+          );                                      // however, the trigger is only with change to f2 and not f1
       })
     )
   .subscribe(combinedValue => this.combinedValue = combinedValue);

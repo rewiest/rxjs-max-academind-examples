@@ -9,26 +9,26 @@ import { Subject } from 'rxjs';
 export class SubjectComponent {
 
   values: Array<string> = [];
-  subject = new Subject();
+  subject = new Subject();                  // create a new observable via Subject
 
-  subscription1 = this.subject.subscribe({
-    next: (value) => {
+  subscription1 = this.subject.subscribe(   // create a subscriber
+    (value) => {
       this.values.push(value as string);
     },
-    error: (error) => {
+    (error) => {
       this.values.push(error as string);
     },
-    complete: () => {
+    () => {
       this.values.push('Completed');
     }
-  });
+  );
 
-  subscription2 = this.subject.subscribe({
-    next: (value) => {
+  subscription2 = this.subject.subscribe(   // create a second subscriber
+    (value) => {
       this.values.push(value as string);
     }
-  });
+  );
 
-  subject1 = this.subject.next('A new data piece');
-  subject2 = this.subject.complete();
+  subject1 = this.subject.next('A new data piece');   // transmits the text via observable
+  subject2 = this.subject.complete();                 // transmits a completion of observable
 }
